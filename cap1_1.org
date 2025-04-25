@@ -1,0 +1,153 @@
+- DeNero — Compondo Programas — (1) Construindo Abstrações com Funções
+  - DeNero — Compondo Programas — (1.1) Começando
+    - 1.1.1 Programando em Python
+    - 1.1.2 Instalando Python 3
+    - 1.1.3 Sessões Interativas
+    - 1.1.4 Primeiro Exemplo
+    - 1.1.5 Erros
+
+* Seção 1.1 — Começando
+
+A ciência da computação é uma disciplina acadêmica extremamente ampla. As áreas de sistemas globalmente distribuídos, inteligência artificial, robótica, gráficos, segurança, computação científica, arquitetura de computadores e dezenas de subcampos emergentes se expandem com novas técnicas e descobertas todos os anos. O rápido progresso da ciência da computação deixou poucos aspectos da vida humana inalterados. Comércio, comunicação, ciência, arte, lazer e política foram todos reinventados como domínios computacionais.
+
+A alta produtividade da ciência da computação é possível apenas porque a disciplina é construída sobre um conjunto elegante e poderoso de ideias fundamentais. Toda computação começa com a representação de informações, especificando lógica para processá-las e projetando abstrações que gerenciam a complexidade dessa lógica. Dominar esses fundamentos exigirá que entendamos precisamente como os computadores interpretam programas de computador e realizam processos computacionais.
+
+Essas ideias fundamentais foram ensinadas há muito tempo usando o clássico livro Estrutura e Interpretação de Programas de Computador (SICP), escrito por Harold Abelson e Gerald Jay Sussman com Julie Sussman. Este texto é fortemente baseado nesse livro, que os autores originais gentilmente licenciaram para adaptação e reutilização sob uma licença Creative Commons. Estas notas são publicadas sob a licença Creative Commons de atribuição não comercial, com compartilhamento pela mesma licença, versão 3.
+
+** Seção 1.1.1 — Programando em Python
+
+#+BEGIN_QUOTE
+Uma linguagem não é tanto algo que você aprende, mas algo ao qual você se junta.
+
+— Arika Okrent
+#+END_QUOTE
+
+Para definir processos computacionais, precisamos de uma linguagem de programação; preferencialmente uma que muitos humanos e uma grande variedade de computadores possam entender. Neste texto, trabalharemos principalmente com a linguagem Python.
+
+Python é uma linguagem de programação amplamente utilizada que recrutou entusiastas de muitas profissões: programadores web, engenheiros de jogos, cientistas, acadêmicos e até designers de novas linguagens de programação. Ao aprender Python, você se junta a uma comunidade de desenvolvedores de um milhão de pessoas. Comunidades de desenvolvedores são instituições tremendamente importantes: os membros ajudam uns aos outros a resolver problemas, compartilhar seus projetos e experiências, e desenvolver  /software/ e ferramentas coletivamente. Membros dedicados muitas vezes alcançam celebridade e estima generalizada por suas contribuições.
+
+A própria linguagem Python é o produto de uma grande comunidade de voluntários que se orgulha da diversidade de seus colaboradores. A linguagem foi concebida e implementada pela primeira vez por Guido van Rossum no final dos anos 1980. O primeiro capítulo de seu Tutorial em Python 3 explica por que Python é tão popular, entre as muitas linguagens disponíveis hoje.
+
+Python se destaca como uma linguagem para instrução porque, ao longo de sua história, os desenvolvedores de Python enfatizaram a interpretabilidade humana do código Python, reforçada pelos princípios orientadores do Zen do Python de beleza, simplicidade e legibilidade. Python é particularmente apropriada para este texto porque seu amplo conjunto de recursos suporta uma variedade de diferentes estilos de programação, que exploraremos ao longo do texto. Embora não haja uma única maneira de programar em Python, existe um conjunto de convenções compartilhadas pela comunidade de desenvolvedores que facilitam a leitura, compreensão e extensão de programas existentes. A combinação de grande flexibilidade e acessibilidade do Python permite que os estudantes explorem muitos paradigmas de programação e, em seguida, apliquem seus conhecimentos recém-adquiridos a milhares de projetos em andamento.
+
+Estas notas mantêm o espírito do SICP, introduzindo os recursos do Python em conjunto com técnicas de abstração e um modelo rigoroso de computação. Além disso, essas notas fornecem uma introdução prática à programação em Python, incluindo alguns recursos avançados da linguagem e exemplos ilustrativos. Sua habilidade com Python aumentará naturalmente à medida que você progredir pelo texto.
+
+A melhor maneira de começar a programar em Python é interagir diretamente com o interpretador. Esta seção descreve como instalar Python 3, iniciar uma sessão interativa com o interpretador e começar a programar.
+
+** Seção 1.1.2 — Instalando Python 3
+
+Como todo ótimo /software/, Python tem muitas versões. Este texto usará a versão estável mais recente do Python 3. Muitos computadores já têm versões mais antigas do Python instaladas, como o Python 2.7, mas essas não corresponderão às descrições neste texto. Você deve ser capaz de usar qualquer computador, mas se prepare para instalar Python 3. (Não se preocupe, Python é gratuito.)
+
+Você pode baixar Python 3 da página de downloads do Python clicando na versão que começa com 3 (não 2). Siga as instruções do instalador para concluir a instalação.
+
+Para orientações adicionais, verifique estes tutoriais em vídeo sobre instalação no Windows e instalação no Mac de Python 3, criados por Julia Oh.
+
+** Seção 1.1.3 — Sessões Interativas
+
+Em uma sessão interativa de Python, você digita algum código Python após o prompt, ~>>>~. O interpretador Python lê e executa o que você digita, realizando seus vários comandos.
+
+Para iniciar uma sessão interativa, execute o aplicativo Python 3. Digite ~python3~ em um prompt de terminal (Mac/Unix/Linux) ou abra o aplicativo Python 3 no Windows.
+
+Se você ver o prompt do Python, ~>>>~, você iniciou com sucesso uma sessão interativa. Estas notas retratam interações de exemplo usando o prompt, seguidas por alguma entrada.
+
+#+BEGIN_SRC python
+>>> 2 + 2
+4
+#+END_SRC
+
+*Controles interativos.* Cada sessão mantém um histórico do que você digitou. Para acessar esse histórico, pressione <Control>-P (anterior) e <Control>-N (próximo). <Control>-D sai de uma sessão, o que descarta esse histórico. As setas para cima e para baixo também percorrem o histórico em alguns sistemas.
+
+** Seção 1.1.4 — Primeiro Exemplo
+
+#+BEGIN_QUOTE
+E, à medida que a imaginação dá corpo às formas das coisas desconhecidas, a caneta do poeta as transforma em formas e dá ao nada aéreo uma habitação local e um nome.
+
+— William Shakespeare, Sonho de uma Noite de Verão
+#+END_QUOTE
+
+Para dar uma introdução adequada ao Python, começaremos com um exemplo que usa vários recursos da linguagem. Na próxima seção, começaremos do zero e construiremos a linguagem peça por peça. Pense nesta seção como uma prévia dos recursos a serem apresentados.
+
+Python tem suporte embutido para uma ampla gama de atividades de programação comuns, como manipular texto, exibir gráficos e comunicar-se pela Internet. A linha de código Python
+
+#+BEGIN_SRC python
+>>> from urllib.request import urlopen
+#+END_SRC
+
+é uma declaração de importação que carrega funcionalidades para acessar dados na Internet. Em particular, ela disponibiliza uma função chamada urlopen, que pode acessar o conteúdo em um localizador de recursos uniforme (URL), um local de algo na Internet.
+
+Declarações e Expressões. O código Python consiste em expressões e declarações. De modo geral, os programas de computador consistem em instruções para ou
+
+ - Calcular algum valor
+ - Realizar alguma ação
+
+As declarações geralmente descrevem ações. Quando o interpretador Python executa uma declaração, ele realiza a ação correspondente. Por outro lado, as expressões geralmente descrevem cálculos. Quando o Python avalia uma expressão, ele computa o valor dessa expressão. Este capítulo apresenta vários tipos de declarações e expressões.
+
+A declaração de atribuição
+
+#+BEGIN_SRC python
+>>> shakespeare = urlopen('http://composingprograms.com/shakespeare.txt')
+#+END_SRC
+
+associa o nome shakespeare ao valor da expressão que segue =. Essa expressão aplica a função urlopen a uma URL que contém o texto completo das 37 peças de William Shakespeare, todas em um único documento de texto.
+
+Funções. Funções encapsulam lógica que manipula dados. urlopen é uma função. Um endereço da web é um dado, e o texto das peças de Shakespeare é outro. O processo pelo qual o primeiro leva ao segundo pode ser complexo, mas podemos aplicar esse processo usando apenas uma expressão simples porque essa complexidade está escondida dentro de uma função. Funções são o tema principal deste capítulo.
+
+Outra declaração de atribuição
+
+#+BEGIN_SRC python
+>>> words = set(shakespeare.read().decode().split())
+#+END_SRC
+
+associa o nome words ao conjunto de todas as palavras únicas que aparecem nas peças de Shakespeare, todas 33.721 delas. A cadeia de comandos para ler, decodificar e dividir, cada uma opera em uma entidade computacional intermediária: lemos os dados da URL aberta, depois decodificamos os dados em texto e, finalmente, dividimos o texto em palavras. Todas essas palavras são colocadas em um conjunto.
+
+Objetos. Um conjunto é um tipo de objeto, um que suporta operações de conjunto como calcular interseções e associação. Um objeto agrupa de forma contínua dados e a lógica que manipula esses dados, de uma maneira que gerencia a complexidade de ambos. Objetos são o tema principal do Capítulo 2. Finalmente, a expressão
+
+#+BEGIN_SRC python
+>>> {w for w in words if len(w) == 6 and w[::-1] in words}
+{'redder', 'drawer', 'reward', 'diaper', 'repaid'}
+#+END_SRC
+
+é uma expressão composta que avalia o conjunto de todas as palavras shakespearianas que são simultaneamente uma palavra soletrada de trás para frente. A notação criptográfica w[::-1] enumera cada letra em uma palavra, mas o -1 indica que deve-se avançar para trás. Quando você insere uma expressão em uma sessão interativa, Python imprime seu valor na linha seguinte.
+
+*** Interpretadores
+
+Avaliar expressões compostas requer um procedimento preciso que interpreta o código de maneira previsível. Um programa que implementa tal procedimento, avaliando expressões compostas, é chamado de interpretador. O design e a implementação de interpretadores é o principal tópico do Capítulo 3.
+
+Quando comparado com outros programas de computador, os interpretadores de linguagens de programação são únicos em sua generalidade. Python não foi projetado com Shakespeare em mente. No entanto, sua grande flexibilidade nos permitiu processar uma grande quantidade de texto com apenas algumas declarações e expressões.
+
+No final, descobriremos que todos esses conceitos fundamentais estão intimamente relacionados: funções são objetos, objetos são funções e interpretadores são instâncias de ambos. No entanto, desenvolver uma compreensão clara de cada um desses conceitos e seu papel na organização do código é fundamental para dominar a arte da programação.
+
+** Seção 1.1.5 — Erros
+
+Python está esperando seu comando. Você é incentivado a experimentar a linguagem, mesmo que ainda não conheça todo o seu vocabulário e estrutura. No entanto, esteja preparado para erros. Embora os computadores sejam tremendamente rápidos e flexíveis, eles também são extremamente rígidos. A natureza dos computadores é descrita no curso introdutório de Stanford como:
+
+A equação fundamental dos computadores é:
+
+#+BEGIN_SRC
+> computador = poderoso + estúpido
+#+END_SRC
+
+Os computadores são muito poderosos, analisando grandes volumes de dados muito rapidamente. Os computadores podem realizar bilhões de operações por segundo, onde cada operação é bastante simples.
+
+Os computadores também são incrivelmente estúpidos e frágeis. As operações que eles podem realizar são extremamente rígidas, simples e mecânicas. O computador não tem nada parecido com uma verdadeira percepção... não é nada como o HAL 9000 dos filmes. No mínimo, você não deve se sentir intimidado pelo computador como se fosse algum tipo de cérebro. É muito mecânico por baixo de tudo isso.
+
+#+BEGIN_QUOTE
+Programar é sobre uma pessoa usando sua verdadeira percepção para construir algo útil, construído a partir dessas pequenas e simples operações que o computador pode realizar.
+
+— Francisco Cai e Nick Parlante, Stanford CS101
+#+END_QUOTE
+
+A rigidez dos computadores se tornará imediatamente aparente à medida que você experimenta com o interpretador Python: até mesmo as menores mudanças de ortografia e formatação causarão saídas inesperadas e erros.
+
+Aprender a interpretar erros e diagnosticar a causa de erros inesperados é chamado de depuração. Alguns princípios orientadores da depuração são:
+
+1. Teste incrementalmente: Todo programa bem escrito é composto de pequenos componentes modulares que podem ser testados individualmente. Experimente tudo o que você escreve o mais rápido possível para identificar problemas cedo e ganhar confiança em seus componentes.
+2. Isole erros: Um erro na saída de uma declaração pode geralmente ser atribuído a um componente modular específico. Ao tentar diagnosticar um problema, trace o erro até o menor fragmento de código que você puder antes de tentar corrigi-lo.
+3. Verifique suas suposições: Os interpretadores executam suas instruções à risca — nem mais nem menos. Sua saída é inesperada quando o comportamento de algum código não corresponde ao que o programador acredita (ou assume) ser esse comportamento. Conheça suas suposições, depois concentre seus esforços de depuração em verificar se suas suposições realmente se sustentam.
+4. Consulte outras pessoas: Você não está sozinho! Se você não entender uma mensagem de erro, pergunte a um amigo, instrutor ou mecanismo de busca. Se você isolou um erro, mas não consegue descobrir como corrigi-lo, peça a alguém para dar uma olhada. Muito conhecimento valioso sobre programação é compartilhado no processo de resolução de problemas em grupo.
+
+Testes incrementais, design modular, suposições precisas e trabalho em equipe são temas que persistem ao longo deste texto. Esperançosamente, eles também persistirão ao longo de sua carreira em ciência da computação.
+
+**Continue:** 1.2 Elementos da Programação
+
+Compondo Programas de John DeNero, baseado no livro-texto /Structure and Interpretation of Computer Programs/ de Harold Abelson e Gerald Jay Sussman, é licenciado sob uma Licença Creative Commons Attribution-ShareAlike 3.0 Unported.
