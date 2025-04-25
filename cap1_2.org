@@ -1,0 +1,318 @@
+- DeNero — Compondo Programas — (1) Construindo Abstrações com Funções
+  - DeNero — Compondo Programas — (1.2) Elementos de Programação
+    - 1.2.1 Expressões
+    - 1.2.2 Expressões de Chamada
+    - 1.2.3 Importando Funções de Bibliotecas
+    - 1.2.4 Nomes e o Ambiente
+    - 1.2.5 Avaliando Expressões Aninhadas
+    - 1.2.6 A Função de Impressão Impura
+
+* Seção 1.2 — Elementos de Programação
+
+Uma linguagem de programação é mais do que apenas um meio de instruir um computador a realizar tarefas. A linguagem também serve como uma estrutura dentro da qual organizamos nossas ideias sobre processos computacionais. Os programas servem para comunicar essas ideias entre os membros de uma comunidade de programação. Assim, os programas devem ser escritos para que as pessoas os leiam, e apenas incidentalmente para que as máquinas os executem.
+
+Quando descrevemos uma linguagem, devemos prestar atenção especial aos meios que a linguagem fornece para combinar ideias simples para formar ideias mais complexas. Toda linguagem poderosa possui três desses mecanismos:
+
+- expressões e declarações primitivas, que representam os blocos de construção mais simples que a linguagem fornece,
+- meios de combinação, pelos quais elementos compostos são construídos a partir de elementos mais simples, e
+- meios de abstração, pelos quais elementos compostos podem ser nomeados e manipulados como unidades.
+
+Na programação, lidamos com dois tipos de elementos: funções e dados. (Logo descobriremos que eles realmente não são tão distintos.) Informalmente, dados são coisas que queremos manipular, e funções descrevem as regras para manipular os dados. Assim, qualquer linguagem de programação poderosa deve ser capaz de descrever dados primitivos e funções primitivas, bem como ter alguns métodos para combinar e abstrair tanto funções quanto dados.
+
+** Seção 1.2.1 — Expressões
+
+Tendo experimentado com o interpretador Python completo na seção anterior, agora começamos de novo, desenvolvendo meticulosamente o elemento da linguagem Python por elemento. Seja paciente se os exemplos parecerem simplistas — material mais emocionante virá em breve.
+
+Começamos com expressões primitivas. Um tipo de expressão primitiva é um número. Mais precisamente, a expressão que você digita consiste nos algarismos que representam o número na base 10.
+
+#+BEGIN_SRC python
+>>> 42
+42
+#+END_SRC
+
+Expressões que representam números podem ser combinadas com operadores matemáticos para formar uma expressão composta, que o interpretador avaliará:
+
+#+BEGIN_SRC python
+>>> -1 - -1
+0
+>>> 1/2 + 1/4 + 1/8 + 1/16 + 1/32 + 1/64 + 1/128
+0.9921875
+#+END_SRC
+
+Essas expressões matemáticas usam notação infixa, onde o operador (por exemplo, +, -, * ou /) aparece entre os operandos (números). Python inclui muitas maneiras de formar expressões compostas. Em vez de tentar enumerá-las todas imediatamente, apresentaremos novas formas de expressão à medida que avançamos, junto com os recursos da linguagem que elas suportam.
+
+** Seção 1.2.2 — Expressões de Chamada
+
+O tipo mais importante de expressão composta é uma expressão de chamada, que aplica uma função a alguns argumentos. Lembre-se da álgebra de que a noção matemática de uma função é um mapeamento de alguns argumentos de entrada para um valor de saída. Por exemplo, a função max mapeia suas entradas para uma única saída, que é a maior das entradas. A maneira como Python expressa a aplicação de funções é a mesma que na matemática convencional.
+
+#+BEGIN_SRC python
+>>> max(7.5, 9.5)
+9.5
+#+END_SRC
+
+Esta expressão de chamada tem subexpressões: o operador é uma expressão que precede parênteses, que incluem uma lista delimitada por vírgulas de expressões de operando.
+
+O operador especifica uma função. Quando essa expressão de chamada é avaliada, dizemos que a função max é chamada com argumentos 7.5 e 9.5, e retorna um valor de 9.5.
+
+A ordem dos argumentos em uma expressão de chamada importa. Por exemplo, a função pow eleva seu primeiro argumento à potência do segundo argumento.
+
+#+BEGIN_SRC python
+>>> pow(100, 2)
+10000
+>>> pow(2, 100)
+1267650600228229401496703205376
+#+END_SRC
+
+A notação de função tem três vantagens principais sobre a convenção matemática de notação infixa. Primeiro, as funções podem aceitar um número arbitrário de argumentos:
+
+#+BEGIN_SRC python
+>>> max(1, -2, 3, -4)
+3
+#+END_SRC
+
+Nenhuma ambiguidade pode surgir, porque o nome da função sempre precede seus argumentos.
+
+Segundo, a notação de função se estende de maneira direta a expressões aninhadas, onde os elementos são eles próprios expressões compostas. Em expressões de chamada aninhadas, ao contrário das expressões compostas infixas, a estrutura do aninhamento é totalmente explícita nos parênteses.
+
+#+BEGIN_SRC python
+>>> max(min(1, -2), min(pow(3, 5), -4))
+-2
+#+END_SRC
+
+Não há limite (em princípio) para a profundidade de tal aninhamento e para a complexidade geral das expressões que o interpretador Python pode avaliar. No entanto, os humanos rapidamente se confundem com aninhamentos de vários níveis. Um papel importante para você como programador é estruturar expressões de modo que permaneçam interpretáveis por você mesmo, seus parceiros de programação e outras pessoas que possam ler suas expressões no futuro.
+
+Terceiro, a notação matemática possui uma grande variedade de formas: a multiplicação aparece entre termos, os expoentes aparecem como sobrescritos, a divisão como uma barra horizontal e a raiz quadrada como um telhado com laterais inclinadas. Parte dessa notação é muito difícil de digitar! No entanto, toda essa complexidade pode ser unificada via a notação de expressões de chamada. Embora o Python suporte operadores matemáticos comuns usando notação infixa (como + e -), qualquer operador pode ser expresso como uma função com um nome.
+
+** Seção 1.2.3 — Importando Funções de Biblioteca
+
+Python define um número muito grande de funções, incluindo as funções de operadores mencionadas na seção anterior, mas não torna todos os seus nomes disponíveis por padrão. Em vez disso, organiza as funções e outras quantidades que conhece em módulos, que juntos compõem a Biblioteca Python. Para usar esses elementos, importa-se eles. Por exemplo, o módulo `math` fornece uma variedade de funções matemáticas familiares:
+
+#+BEGIN_SRC python
+>>> from math import sqrt
+>>> sqrt(256)
+16.0
+#+END_SRC
+
+e o módulo operator fornece acesso a funções correspondentes a operadores infixos:
+
+#+BEGIN_SRC python
+>>> from operator import add, sub, mul
+>>> add(14, 28)
+42
+>>> sub(100, mul(7, add(8, 4)))
+16
+#+END_SRC
+
+Uma declaração de importação designa um nome de módulo (por exemplo, operator ou math), e então lista os atributos nomeados desse módulo para importar (por exemplo, sqrt). Uma vez que uma função é importada, ela pode ser chamada várias vezes.
+
+Não há diferença entre usar essas funções de operador (por exemplo, add) e os próprios símbolos do operador (por exemplo, +). Convencionalmente, a maioria dos programadores usa símbolos e notação infixa para expressar aritmética simples.
+
+Os Documentos da Biblioteca do Python 3 listam as funções definidas por cada módulo, como o módulo math. No entanto, esta documentação é escrita para desenvolvedores que conhecem bem toda a linguagem. Por enquanto, você pode achar que experimentar com uma função lhe diz mais sobre seu comportamento do que ler a documentação. À medida que você se familiariza com a linguagem e o vocabulário Python, essa documentação se tornará uma fonte de referência valiosa.
+
+** Seção 1.2.4 — Nomes e o Ambiente
+
+Um aspecto crítico de uma linguagem de programação é o meio que ela fornece para usar nomes para se referir a objetos computacionais. Se um valor recebeu um nome, dizemos que o nome está vinculado ao valor.
+
+Em Python, podemos estabelecer novas vinculações usando a declaração de atribuição, que contém um nome à esquerda de = e um valor à direita:
+
+#+BEGIN_SRC python
+>>> radius = 10
+>>> radius
+10
+>>> 2 * radius
+20
+#+END_SRC
+
+Os nomes também são vinculados por meio de declarações de importação.
+
+#+BEGIN_SRC python
+>>> from math import pi
+>>> pi * 71 / 223
+1.0002380197528042
+#+END_SRC
+
+O símbolo = é chamado de operador de atribuição em Python (e muitas outras linguagens). A atribuição é nosso meio mais simples de abstração, pois permite que usemos nomes simples para nos referir aos resultados de operações compostas, como a área calculada acima. Dessa forma, programas complexos são construídos passo a passo, construindo objetos computacionais de complexidade crescente.
+
+A possibilidade de vincular nomes a valores e depois recuperar esses valores pelo nome significa que o interpretador deve manter algum tipo de memória que acompanhe os nomes, valores e vinculações. Essa memória é chamada de ambiente.
+
+Os nomes também podem ser vinculados a funções. Por exemplo, o nome max está vinculado à função max que temos usado. As funções, ao contrário dos números, são difíceis de representar como texto, então o Python imprime uma descrição identificadora quando solicitado a descrever uma função:
+
+#+BEGIN_SRC python
+>>> max
+<built-in function max>
+#+END_SRC
+
+Podemos usar declarações de atribuição para dar novos nomes a funções existentes.
+
+#+BEGIN_SRC python
+>>> f = max
+>>> f
+<built-in function max>
+>>> f(2, 3, 4)
+4
+#+END_SRC
+
+E declarações de atribuição sucessivas podem reatribuir um nome a um novo valor.
+
+#+BEGIN_SRC python
+>>> f = 2
+>>> f
+2
+#+END_SRC
+
+Em Python, os nomes são frequentemente chamados de nomes de variáveis ou variáveis porque podem ser vinculados a diferentes valores no decorrer da execução de um programa. Quando um nome é vinculado a um novo valor por meio da atribuição, ele não está mais vinculado a qualquer valor anterior. Pode-se até mesmo vincular nomes incorporados a novos valores.
+
+#+BEGIN_SRC python
+>>> max = 5
+>>> max
+5
+#+END_SRC
+
+Após atribuir max a 5, o nome max não está mais vinculado a uma função, e assim tentar chamar max(2, 3, 4) causará um erro.
+
+Ao executar uma declaração de atribuição, Python avalia a expressão à direita de = antes de alterar a vinculação do nome à esquerda. Portanto, pode-se referir a um nome na expressão à direita, mesmo que seja o nome a ser vinculado pela declaração de atribuição.
+
+#+BEGIN_SRC python
+>>> x = 2
+>>> x = x + 1
+>>> x
+3
+#+END_SRC
+
+Também podemos atribuir vários valores a vários nomes em uma única declaração, onde os nomes à esquerda de = e as expressões à direita de = são separados por vírgulas.
+
+#+BEGIN_SRC python
+>>> area, circumference = pi * radius * radius, 2 * pi * radius
+>>> area
+314.1592653589793
+>>> circumference
+62.83185307179586
+#+END_SRC
+
+Alterar o valor de um nome não afeta outros nomes. Abaixo, mesmo que o nome area tenha sido vinculado a um valor definido originalmente em termos de radius, o valor de area não mudou. Atualizar o valor de area requer outra declaração de atribuição.
+
+#+BEGIN_SRC python
+>>> radius = 11
+>>> area
+314.1592653589793
+>>> area = pi * radius * radius
+380.132711084365
+#+END_SRC
+
+Com a atribuição múltipla, todas as expressões à direita de = são avaliadas antes que quaisquer nomes à esquerda sejam vinculados a esses valores. Como resultado dessa regra, trocar os valores vinculados a dois nomes pode ser realizado em uma única declaração.
+
+#+BEGIN_SRC python
+>>> x, y = 3, 4.5
+>>> y, x = x, y
+>>> x
+4.5
+>>> y
+3
+#+END_SRC
+
+** Seção 1.2.5 — Avaliando Expressões Aninhadas
+
+Um de nossos objetivos neste capítulo é isolar questões sobre pensar proceduralmente. Como exemplo, consideremos que, ao avaliar expressões de chamada aninhadas, o interpretador está seguindo um procedimento.
+
+Para avaliar uma expressão de chamada, o Python fará o seguinte:
+
+1. Avaliar o operador e as subexpressões do operando, depois
+2. Aplicar a função que é o valor da subexpressão do operador aos argumentos que são os valores das subexpressões do operando.
+
+Mesmo este procedimento simples ilustra alguns pontos importantes sobre processos em geral. O primeiro passo dita que, para realizar o processo de avaliação de uma expressão de chamada, devemos primeiro avaliar outras expressões. Assim, o procedimento de avaliação é recursivo por natureza; isto é, inclui, como um de seus passos, a necessidade de invocar a própria regra.
+
+Por exemplo, avaliar
+
+#+BEGIN_SRC python
+>>> sub(pow(2, add(1, 10)), pow(2, 5))
+2016
+#+END_SRC
+
+requer que este procedimento de avaliação seja aplicado quatro vezes. Se desenharmos cada expressão que avaliamos, podemos visualizar a estrutura hierárquica deste processo.
+
+Esta ilustração é chamada de árvore de expressão. Em ciência da computação, as árvores crescem convencionalmente de cima para baixo. Os objetos em cada ponto de uma árvore são chamados de nós; neste caso, são expressões emparelhadas com seus valores.
+
+Avaliar sua raiz, a expressão completa no topo, requer primeiro avaliar os ramos que são suas subexpressões. As expressões folha (ou seja, nós sem ramos que se originam deles) representam ou funções ou números. Os nós internos têm duas partes: a expressão de chamada à qual nossa regra de avaliação é aplicada e o resultado dessa expressão. Visualizando a avaliação em termos desta árvore, podemos imaginar que os valores dos operandos percolam para cima, começando dos nós terminais e depois se combinando em níveis cada vez mais altos.
+
+Em seguida, observe que a aplicação repetida do primeiro passo nos leva ao ponto onde precisamos avaliar, não expressões de chamada, mas expressões primitivas como numerais (por exemplo, 2) e nomes (por exemplo, add). Lidamos com os casos primitivos estipulando que
+
+    - Um numeral avalia-se para o número que nomeia,
+    - Um nome avalia-se para o valor associado a esse nome no ambiente atual.
+
+Note o papel importante de um ambiente em determinar o significado dos símbolos nas expressões. Em Python, é sem sentido falar do valor de uma expressão como
+
+#+BEGIN_SRC python
+>>> add(x, 1)
+#+END_SRC
+
+sem especificar qualquer informação sobre o ambiente que forneceria um significado para o nome x (ou mesmo para o nome add). Ambientes fornecem o contexto no qual a avaliação ocorre, o que desempenha um papel importante em nossa compreensão da execução de programas.
+
+Este procedimento de avaliação não é suficiente para avaliar todo o código Python, apenas expressões de chamada, numerais e nomes. Por exemplo, não lida com declarações de atribuição. Executar
+
+#+BEGIN_SRC python
+>>> x = 3
+#+END_SRC
+
+não retorna um valor nem avalia uma função em alguns argumentos, já que o propósito da atribuição é, em vez disso, vincular um nome a um valor. Em geral, declarações não são avaliadas, mas executadas; elas não produzem um valor, mas fazem alguma mudança. Cada tipo de expressão ou declaração tem seu próprio procedimento de avaliação ou execução.
+
+Uma nota pedante: quando dizemos que "um numeral avalia-se para um número", na verdade queremos dizer que o interpretador Python avalia um numeral para um número. É o interpretador que confere significado à linguagem de programação. Dado que o interpretador é um programa fixo que sempre se comporta de maneira consistente, podemos dizer que numerais (e expressões) em si avaliam-se para valores no contexto de programas Python.
+
+** Seção 1.2.6 — A Função Impura Print
+
+Ao longo deste texto, distinguiremos entre dois tipos de funções.
+
+Funções puras. As funções têm alguma entrada (seus argumentos) e retornam alguma saída (o resultado de aplicá-las). A função embutida
+
+#+BEGIN_SRC python
+>>> abs(-2)
+2
+#+END_SRC
+
+pode ser representada como uma pequena máquina que recebe entrada e produz saída.
+
+A função abs é pura. Funções puras têm a propriedade de que aplicá-las não tem efeitos além de retornar um valor. Além disso, uma função pura deve sempre retornar o mesmo valor quando chamada duas vezes com os mesmos argumentos.
+
+Funções impuras. Além de retornar um valor, aplicar uma função impura pode gerar efeitos colaterais, que fazem alguma mudança no estado do interpretador ou do computador. Um efeito colateral comum é gerar saída adicional além do valor de retorno, usando a função print.
+
+#+BEGIN_SRC python
+>>> print(1, 2, 3)
+1 2 3
+#+END_SRC
+
+Embora print e abs possam parecer semelhantes nestes exemplos, elas funcionam de maneiras fundamentalmente diferentes. O valor que print retorna é sempre None, um valor especial do Python que representa nada. O interpretador interativo do Python não imprime automaticamente o valor None. No caso de print, a própria função está imprimindo a saída como um efeito colateral de ser chamada.
+
+Uma expressão aninhada de chamadas para print destaca o caráter não puro da função.
+
+#+BEGIN_SRC python
+>>> print(print(1), print(2))
+1
+2
+None None
+#+END_SRC
+
+Se você achar essa saída inesperada, desenhe uma árvore de expressão para esclarecer por que avaliar esta expressão produz esta saída peculiar.
+
+Tenha cuidado com print! O fato de que ela retorna None significa que não deve ser a expressão em uma declaração de atribuição.
+
+#+BEGIN_SRC python
+>>> two = print(2)
+2
+>>> print(two)
+None
+#+END_SRC
+
+Funções puras são restritas no sentido de que não podem ter efeitos colaterais ou mudar de comportamento ao longo do tempo. Impor essas restrições traz benefícios substanciais. Primeiro, funções puras podem ser compostas de maneira mais confiável em expressões de chamada compostas. Podemos ver no exemplo de função impura acima que print não retorna um resultado útil quando usada em uma expressão de operando. Por outro lado, vimos que funções como max, pow e sqrt podem ser usadas efetivamente em expressões aninhadas.
+
+Segundo, funções puras tendem a ser mais simples de testar. Uma lista de argumentos sempre levará ao mesmo valor de retorno, que pode ser comparado ao valor de retorno esperado. Testes são discutidos em mais detalhes mais adiante neste capítulo.
+
+Terceiro, o Capítulo 4 ilustrará que funções puras são essenciais para escrever programas concorrentes, nos quais múltiplas expressões de chamada podem ser avaliadas simultaneamente.
+
+Por outro lado, o Capítulo 2 investiga uma gama de funções impuras e descreve seus usos.
+
+Por essas razões, nos concentramos bastante na criação e uso de funções puras no restante deste capítulo. A função print é usada apenas para que possamos ver os resultados intermediários das computações.
+
+**Continue:** 1.3 Definindo Novas Funções
+
+#+BEGIN_QUOTE
+Compondo Programas de John DeNero, baseado no livro-texto /Structure and Interpretation of Computer Programs/ de Harold Abelson e Gerald Jay Sussman, é licenciado sob uma Licença Creative Commons Attribution-ShareAlike 3.0 Unported.
+#+END_QUOTE
