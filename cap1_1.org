@@ -148,6 +148,8 @@ Aprender a interpretar erros e diagnosticar a causa de erros inesperados é cham
 
 Testes incrementais, design modular, suposições precisas e trabalho em equipe são temas que persistem ao longo deste texto. Esperançosamente, eles também persistirão ao longo de sua carreira em ciência da computação.
 
-**Continue:** 1.2 Elementos da Programação
+*Continue:* 1.2 Elementos da Programação
 
+#+BEGIN_QUOTE
 Compondo Programas de John DeNero, baseado no livro-texto /Structure and Interpretation of Computer Programs/ de Harold Abelson e Gerald Jay Sussman, é licenciado sob uma Licença Creative Commons Attribution-ShareAlike 3.0 Unported.
+#+END_QUOTE
